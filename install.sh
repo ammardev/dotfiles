@@ -64,7 +64,7 @@ function install_new_dotfiles() {
 function nvim_install() {
     install_app "NeoVim" "nvim"
 
-    install_app "rigrep" "rigrep"
+    install_app "ripgrep" "ripgrep"
 
     backup_existed_dotfile "NeoVim" ".config/nvim"
 
