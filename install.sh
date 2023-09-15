@@ -55,7 +55,7 @@ function backup_existed_dotfile() {
 # Arg 1: Name, Arg 2: Source Path, Arg 3: destination path
 function install_new_dotfiles() {
     if ((!$dryRun)); then
-        ln -s "$2" "$HOME/$3";
+	ln -s "$(dirname "$(realpath "$0")")/$2" "$HOME/$3";
     fi
 
     echo -e "\n$1 Dotfiles installed";
