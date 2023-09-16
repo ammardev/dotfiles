@@ -28,7 +28,12 @@ require("lazy").setup({
     },
     { "nvim-treesitter/nvim-treesitter", build = "TSUpdate"},
     { "tpope/vim-fugitive" },
-    { "airblade/vim-gitgutter" },
+    {
+        "airblade/vim-gitgutter",
+        config = function()
+            vim.cmd("set updatetime=100")
+        end
+    },
     { 'jwalton512/vim-blade' },
     {
         'VonHeikemen/lsp-zero.nvim',
