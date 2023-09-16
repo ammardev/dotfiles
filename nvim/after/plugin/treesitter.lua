@@ -97,6 +97,7 @@ require('nvim-treesitter.configs').setup {
 -- Use treesitter folding
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
 
 
 -- Fixes error cased by telescope.nvim https://github.com/nvim-treesitter/nvim-treesitter/issues/1337#issuecomment-1397639999
