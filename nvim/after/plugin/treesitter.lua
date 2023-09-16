@@ -27,5 +27,16 @@ require('nvim-treesitter.configs').setup {
 	indent = {
 		enable = true
 	}
-
 }
+
+-- Use treesitter folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+
+-- Fixes error cased by telescope.nvim https://github.com/nvim-treesitter/nvim-treesitter/issues/1337#issuecomment-1397639999
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    pattern = { "*" },
+    command = "normal zxzR",
+})
+
