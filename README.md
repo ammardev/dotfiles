@@ -27,7 +27,6 @@ The script will ask you which dotfile you want to install:
   * Add ITerm2 Profile
   * Add .zshrc file
 * Dotfiles
-  * Update nvim plugins file to use lazy/conditinal plugin setup.
   * Add default LSPs
 * Readme
   * Add a section for the custom mappings
