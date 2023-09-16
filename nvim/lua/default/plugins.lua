@@ -56,7 +56,7 @@ require("lazy").setup({
     },
     {
         'nvim-lualine/lualine.nvim',
-        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+        dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }
     },
     {
         "aserowy/tmux.nvim",
