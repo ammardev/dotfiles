@@ -34,7 +34,11 @@ require("lazy").setup({
             vim.cmd("set updatetime=100")
         end
     },
-    { 'jwalton512/vim-blade' },
+    {
+        'jwalton512/vim-blade',
+        lazy = true,
+        event = "BufReadPre *.blade.php"
+    },
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
