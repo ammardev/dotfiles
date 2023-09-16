@@ -69,6 +69,27 @@ require('nvim-treesitter.configs').setup {
             -- and should return true of false
             include_surrounding_whitespace = true,
         },
+        move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+                ["]]"] = "@function.outer",
+                ["]l"] = "@loop.outer",
+                ["]c"] = "@conditional.outer",
+            },
+            goto_next_end = {},
+            goto_previous_start = {
+                ["[["] = "@function.outer",
+                ["[l"] = "@loop.outer",
+                ["[c"] = "@conditional.outer",
+            },
+            goto_previous_end = {},
+            -- Below will go to either the start or the end, whichever is closer.
+            -- Use if you want more granular movements
+            -- Make it even more gradual by adding multiple queries and regex.
+            goto_next = {},
+            goto_previous = {}
+        },
     },
 
 }
