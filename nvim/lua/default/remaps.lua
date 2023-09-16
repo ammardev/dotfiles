@@ -26,3 +26,7 @@ vim.keymap.set("n", "<S-Tab>", ":bp<Cr>")
 -- Splitting windows
 vim.keymap.set("n", "<M-->", ":split<CR>")
 vim.keymap.set("n", "<M-|>", ":vsplit<CR>")
+
+-- Git Gutter Moving
+vim.keymap.set("n", "]g", ":GitGutterNextHunk<CR>")
+vim.keymap.set("n", "[g", ":GitGutterPrevHunk<CR>")
