@@ -1,27 +1,27 @@
 # Custom Remaps
 This section is for documented custom remaps and some plugins remaps.
 
-## Uncategorized
+## NeoVim Remaps
 `<leader>f`: Open file explorer.
 
-## Search (Using telescope)
+### Search (Using telescope)
 `<leader>/`: Search all files.
 
 `<C-p>`: Search git files. Fallback to all files search.
 
 `<C-f>`: Search files contents (Live grep)>
 
-## Clipboard
+### Clipboard
 `<leader>y`: Yank to system's clipboard.
 
 `<leader>p`: Paste from system's clipboard.
 
 `<leader>d`: "Cut" to system's clipboard.
 
-## Buffers
+### Buffers
 `<Tab>`, `<S-Tab>`: Next, Previous buffer.
 
-## Windows (Integrated with Tmux panes)
+### Windows (Integrated with Tmux panes)
 `<C-[hjkl]>`: Move to window.
 
 `<M-[hjkl]>`: Resize window.
@@ -30,21 +30,21 @@ This section is for documented custom remaps and some plugins remaps.
 
 `<M-->`: Split horizontally.
 
-## Text Manipulation
+### Text Manipulation
 `K`, `J` (In visual mode): Move selected text up and down.
 
-## Navigate Inside Code
+### Navigate Inside Code
 
 `[g`, `]g`: Next uncommited git change.
 
-### Using treesitter
+#### Using treesitter
 `[[`, `]]`: Previous, Next function.
 
 `[l`, `]l`: Previous, Next loop.
 
 `[c`, `]c`: Previous, Next condition.
 
-#### New Motions
+##### New Motions
 `af`, `if`: Around function, In function.
 
 `ac`, `ic`: Around class, In class (Work with go struct).
