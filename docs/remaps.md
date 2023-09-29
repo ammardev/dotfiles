@@ -11,6 +11,8 @@ This section is for documented custom remaps and some plugins remaps.
 
 `<C-f>`: Search files contents (Live grep)>
 
+`<leader>b`: Search in opened buffers.
+
 ### Clipboard
 `<leader>y`: Yank to system's clipboard.
 

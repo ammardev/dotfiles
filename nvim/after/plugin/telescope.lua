@@ -6,4 +6,5 @@ vim.keymap.set('n', '<C-p>', function()
 	end
 end)
 vim.keymap.set('n', '<C-f>', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 
