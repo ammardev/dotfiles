@@ -79,11 +79,9 @@ function nvim_install() {
 function tmux_install() {
     install_app "Tmux" "tmux"
 
-    backup_existed_dotfile "Tmux" ".tmux"
+    backup_existed_dotfile "Tmux" ".tmux.conf"
 
-    install_new_dotfiles "Tmux" "tmux" ".tmux"
-
-    # Execute tpm install
+    install_new_dotfiles "Tmux" "tmux/tmux.conf" ".tmux.conf"
 }
 
 function zsh_install() {
