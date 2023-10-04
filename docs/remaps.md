@@ -50,3 +50,8 @@ This section is for documented custom remaps and some plugins remaps.
 `af`, `if`: Around function, In function.
 
 `ac`, `ic`: Around class, In class (Work with go struct).
+
+## Tmux Remaps
+
+`<prefix>r`: Reload tmux configurations.
+`<prefix>p`: Search for a project directory and open project in NeoVim.
