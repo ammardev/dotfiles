@@ -1,5 +1,5 @@
-# [WIP] dotfiles
-[WIP] My personal dotfiles with installation script
+# dotfiles
+My personal dotfiles with installation script
 
 The installation script will do the following:
 * Install the app from Homebrew (If it's not installed).
@@ -28,6 +28,5 @@ The script will ask you which dotfile you want to install:
 * Installation Script
   * Support Ubuntu
   * Add ITerm2 Profile
-  * Add .zshrc file
 * Dotfiles
   * Add default LSPs
