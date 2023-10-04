@@ -1,9 +1,14 @@
 #! /bin/bash
 
 # Check OS
+os = 0
 
-if [ "$(uname)" != "Darwin" ]; then
-    echo 'The script supports MacOs only for now';
+if [ "$(uname)" == "Darwin" ]; then
+    os = 'macos'
+elif [ "$(lsb_release -si)" == "Ubuntu" ]; then
+    os = 'ubuntu'
+else
+    echo 'The script supports MacOs and Ubuntu only!';
     exit 1;
 fi
 
