@@ -74,8 +74,6 @@ function nvim_install() {
     backup_existed_dotfile "NeoVim" ".config/nvim"
 
     install_new_dotfiles "NeoVim" "nvim" ".config/nvim"
-
-    # TODO: Execute lazy package manager install
 }
 
 function tmux_install() {
