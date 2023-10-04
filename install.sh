@@ -86,19 +86,31 @@ function tmux_install() {
     # Execute tpm install
 }
 
+function zsh_install() {
+    backup_existed_dotfile "ZSH" ".zsh"
+    backup_existed_dotfile "ZSH" ".zshrc"
+
+    install_new_dotfiles "zsh directory" "zsh" ".zsh"
+    install_new_dotfiles "zshrc file" "zshrc" ".zshrc"
+}
+
+
 PS3="Select dotfiles to install: "
 
-select selected in "All dotfiles" "NeoVim" "Tmux"; do
+select selected in "All dotfiles" "NeoVim" "Tmux" "ZSH"; do
     case $selected in
         "All dotfiles")
             echo -e "\nInstalling all dotfiles";
 
             nvim_install;
-            tmux_install;;
+            tmux_install;
+            zsh_install;;
         "NeoVim")
             nvim_install;;
         "Tmux")
             tmux_install;;
+        "ZSH")
+            zsh_install;;
         *)
             echo "Invalid Command";
             exit 1;;
