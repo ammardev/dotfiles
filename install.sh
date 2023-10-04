@@ -45,7 +45,7 @@ function install_app() {
 
 # Arg 1: Name, Arg 2: Dotfile path
 function backup_existed_dotfile() {
-    if [ -d "$HOME/$2" ]; then
+    if [ -f "$HOME/$2" ] || [ -d "$HOME/$2" ]; then
         echo -e "\nFound existing $1 configuration directory";
         backupDirectory="$HOME/$2-$(date +%F_%H-%M-%S)";
 
