@@ -75,13 +75,13 @@ require('nvim-treesitter.configs').setup {
             goto_next_start = {
                 ["]]"] = "@function.outer",
                 ["]l"] = "@loop.outer",
-                ["]c"] = "@conditional.outer",
+                ["]f"] = "@conditional.outer",
             },
             goto_next_end = {},
             goto_previous_start = {
                 ["[["] = "@function.outer",
                 ["[l"] = "@loop.outer",
-                ["[c"] = "@conditional.outer",
+                ["[f"] = "@conditional.outer",
             },
             goto_previous_end = {},
             -- Below will go to either the start or the end, whichever is closer.
