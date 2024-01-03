@@ -67,4 +67,5 @@ require("lazy").setup({
         config = function() return require("tmux").setup({copy_sync = { enable = false } }) end
     },
     {'APZelos/blamer.nvim'},
+    {'dhruvasagar/vim-table-mode'},
 })
