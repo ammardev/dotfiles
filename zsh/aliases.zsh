@@ -20,5 +20,5 @@ alias vi="nvim"
 alias vim="nvim"
 alias :q="exit"
 
-alias deploy-to-testing="git checkout develop && git pull && git merge - && git push && git checkout -"
+alias deploy-to-testing="git checkout develop && git fetch && git reset --hard origin/develop && git merge - && git push && git checkout -"
 
