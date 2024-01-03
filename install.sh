@@ -15,6 +15,7 @@ fi
 # Parse flags
 
 dryRun=0;
+isInteractive=0;
 
 flags=$(getopt -l "dry" -- "$@")
 set -- $flags
@@ -23,8 +24,11 @@ while [ $# -gt 0 ]
 do
     case $1 in
         --dry-run)
-            echo -e "Running in dry-run mode. No files will be modified\n"
+            echo -e "Running in dry-run mode. No files will be modified\n";
             dryRun=1;;
+        --interactive)
+            echo -e "Running in interactive mode! :)\n";
+            isInteractive=1;;
     esac
     # Fetch next argument as 1st
     shift
@@ -92,27 +96,33 @@ function zsh_install() {
     install_new_dotfiles "zshrc file" "zshrc" ".zshrc"
 }
 
+function install_all() {
+    echo -e "\nInstalling all dotfiles";
+
+    nvim_install;
+    tmux_install;
+    zsh_install;
+}
 
 PS3="Select dotfiles to install: "
 
-select selected in "All dotfiles" "NeoVim" "Tmux" "ZSH"; do
-    case $selected in
-        "All dotfiles")
-            echo -e "\nInstalling all dotfiles";
-
-            nvim_install;
-            tmux_install;
-            zsh_install;;
-        "NeoVim")
-            nvim_install;;
-        "Tmux")
-            tmux_install;;
-        "ZSH")
-            zsh_install;;
-        *)
-            echo "Invalid Command";
-            exit 1;;
-    esac
-    break;
-done
-
+if (($isInteractive)); then
+    select selected in "All dotfiles" "NeoVim" "Tmux" "ZSH"; do
+        case $selected in
+            "All dotfiles")
+                install_all;;
+            "NeoVim")
+                nvim_install;;
+            "Tmux")
+                tmux_install;;
+            "ZSH")
+                zsh_install;;
+            *)
+                echo "Invalid Command";
+                exit 1;;
+        esac
+        break;
+    done
+else
+    install_all;
+fi
