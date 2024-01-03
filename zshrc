@@ -12,7 +12,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Path updates
 export PATH=/opt/homebrew/bin:$PATH
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$(go env GOPATH)/bin"
 
 
 # Includes
