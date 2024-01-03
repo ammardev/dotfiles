@@ -36,6 +36,14 @@ done
 
 # Arg 1: Name, Arg 2: Name in package manager
 function install_app() {
+    if [ "$os" == "macos" ]; then
+        brew_install $1 $2
+    else
+        apt_install $1 $2
+    fi
+}
+
+function brew_install() {
     if ! command -v brew &> /dev/null; then
         echo -e "\nHomebrew is not found please install it and try again (https://brew.sh)"
         exit 1
@@ -46,6 +54,16 @@ function install_app() {
     brew install "$2"
 }
 
+function apt_install() {
+    if ! command -v apt-get &> /dev/null; then
+        echo -e "\nApt is not found!!"
+        exit 1
+    fi
+
+    echo -e "\nInstalling $1..."
+
+    apt-get install "$2" -y
+}
 
 # Arg 1: Name, Arg 2: Dotfile path
 function backup_existed_dotfile() {
