@@ -5,6 +5,8 @@ os=0
 
 if [ "$(uname)" == "Darwin" ]; then
     os='macos'
+elif [ "$(pwd)" == "/workspaces/.codespaces/.persistedshare/dotfiles" ]; then
+    os="gh"
 elif [ "$(lsb_release -si)" == "Ubuntu" ]; then
     os='ubuntu'
 else
@@ -62,7 +64,11 @@ function apt_install() {
 
     echo -e "\nInstalling $1..."
 
-    apt-get install "$2" -y
+    if [ "$os" == "gh" ]; then
+        sudo apt-get install "$2" -y
+    else
+        apt-get install "$2" -y
+    fi
 }
 
 # Arg 1: Name, Arg 2: Dotfile path
@@ -82,14 +88,18 @@ function backup_existed_dotfile() {
 # Arg 1: Name, Arg 2: Source Path, Arg 3: destination path
 function install_new_dotfiles() {
     if ((!$dryRun)); then
-	ln -s "$(dirname "$(realpath "$0")")/$2" "$HOME/$3";
+        ln -s "$(dirname "$(realpath "$0")")/$2" "$HOME/$3";
     fi
 
     echo -e "\n$1 Dotfiles installed";
 }
 
 function nvim_install() {
-    install_app "NeoVim" "nvim"
+    if [ "$os" == "macos" ]; then
+        install_app "NeoVim" "nvim"
+    else
+        install_app "NeoVim" "neovim"
+    fi
 
     install_app "ripgrep" "ripgrep"
 
@@ -142,5 +152,8 @@ if (($isInteractive)); then
         break;
     done
 else
+    if [ "$os" == "gh" ]; then
+        sudo apt-get update -y
+    fi
     install_all;
 fi
