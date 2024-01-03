@@ -21,4 +21,5 @@ alias vim="nvim"
 alias :q="exit"
 
 alias deploy-to-testing="git checkout develop && git fetch && git reset --hard origin/develop && git merge - && git push && git checkout -"
+alias gc='git checkout $(git branch | fzf-tmux -h)'
 
