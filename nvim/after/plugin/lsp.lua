@@ -19,7 +19,15 @@ require('lspconfig').pylsp.setup({
                 pycodestyle = { enabled = false },
                 preload = { enabled = false },
                 pyflakes = { enabled = false },
-                pylint = { enabled = false },
+                pylint = {
+                    enabled = true,
+                    args = {
+                        "--max-line-length=88",
+                        "--disable=missing-class-docstring,too-few-public-methods,missing-function-docstring,too-many-ancestors",
+                        "--load-plugins=pylint_django",
+                        "--init-hook=\"import sys;sys.path.insert(0, './pyvendor')\"",
+                    },
+                },
                 jedi_completion = {
                     enabled = true,
                 },
