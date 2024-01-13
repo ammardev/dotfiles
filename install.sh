@@ -128,6 +128,8 @@ function zsh_install() {
 
     install_new_dotfiles "zsh directory" "zsh" ".zsh"
     install_new_dotfiles "zshrc file" "zshrc" ".zshrc"
+
+    sudo chsh -s "$(which zsh)"
 }
 
 function install_all() {
