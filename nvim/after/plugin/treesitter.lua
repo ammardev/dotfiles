@@ -106,3 +106,8 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     command = "normal zxzR",
 })
 
+
+
+require("ibl").setup {
+    scope = { enabled = false },
+}

@@ -68,4 +68,5 @@ require("lazy").setup({
     },
     {'APZelos/blamer.nvim'},
     {'dhruvasagar/vim-table-mode'},
+    { "lukas-reineke/indent-blankline.nvim", main="ibl", opts = {} }
 })
