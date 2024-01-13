@@ -107,6 +107,9 @@ function nvim_install() {
 
     install_app "ripgrep" "ripgrep"
     install_app "gcc" "gcc"
+    install_app "npm" "npm"
+    install_app "golang" "golang"
+    install_app "Python VEnv" "python3-venv"
 
     backup_existed_dotfile "NeoVim" ".config/nvim"
 
