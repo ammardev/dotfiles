@@ -106,6 +106,7 @@ function nvim_install() {
     fi
 
     install_app "ripgrep" "ripgrep"
+    install_app "gcc" "gcc"
 
     backup_existed_dotfile "NeoVim" ".config/nvim"
 
