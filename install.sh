@@ -152,8 +152,13 @@ if (($isInteractive)); then
         break;
     done
 else
-    if [ "$os" == "gh" ]; then
+    if [ "$os" == "gh" ] || [ "$os" == "ubuntu" ]; then
         sudo apt-get update -y
     fi
+
+    if [ ! -d "$HOME/.config" ]; then
+        mkdir "$HOME/.config"
+    fi
+
     install_all;
 fi
