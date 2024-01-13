@@ -117,6 +117,8 @@ function tmux_install() {
 }
 
 function zsh_install() {
+    install_app "Zsh" "zsh"
+
     backup_existed_dotfile "ZSH" ".zsh"
     backup_existed_dotfile "ZSH" ".zshrc"
 
