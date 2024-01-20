@@ -81,7 +81,7 @@ lspconfig.jedi_language_server.setup{
 local null_ls = require("null-ls")
 
 null_ls.setup({
-    debug = true,
+    debug = false,
     sources = {
         -- Python
         null_ls.builtins.diagnostics.pylint,
