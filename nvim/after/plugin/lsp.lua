@@ -1,50 +1,92 @@
-local lsp = require('lsp-zero').preset({})
+local lspconfig = require('lspconfig');
 
-lsp.on_attach(function(client, bufnr)
-    -- see :help lsp-zero-keybindings
-    lsp.default_keymaps({buffer = bufnr})
-end)
+vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 
--- (Optional) Configure lua language server for neovim
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
-require('lspconfig').pylsp.setup({
-    settings = {
-        pylsp = {
-            configurationSources = {},
-            plugins = {
-                autopep8 = { enabled = false },
-                flake8 = { enabled = false },
-                yapf = { enabled = false },
-                mccabe = { enabled = false },
-                pycodestyle = { enabled = false },
-                preload = { enabled = false },
-                pyflakes = { enabled = false },
-                pylint = {
-                    enabled = true,
-                    args = {
-                        "--max-line-length=88",
-                        "--disable=missing-class-docstring,too-few-public-methods,missing-function-docstring,too-many-ancestors",
-                        "--load-plugins=pylint_django",
-                        "--init-hook=\"import sys;sys.path.insert(0, './pyvendor')\"",
-                    },
-                },
-                jedi_completion = {
-                    enabled = true,
-                },
-                jedi = {
-                    extra_paths = {'./pyvendor'},
-                }
-            },
-        },
-    }
+vim.api.nvim_create_autocmd('LspAttach', {
+    desc = 'LSP actions',
+    callback = function(event)
+        local opts = {buffer = event.buf}
+
+        -- these will be buffer-local keybindings
+        -- because they only work if you have an active language server
+        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+        vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+        vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+        vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+        vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+        vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+        vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+        vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+        vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+        vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+    end
 })
 
-lsp.setup()
+local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+local default_setup = function(server)
+    lspconfig[server].setup({
+        capabilities = lsp_capabilities,
+    })
+end
+
+require('mason').setup({})
+
+local ensure_installed = {
+    "bashls",
+    "docker_compose_language_service",
+    "gopls",
+    "intelephense",
+    "lua_ls",
+    "tsserver",
+    "yamlls",
+    "jedi_language_server",
+}
+
+require('mason-lspconfig').setup({
+    ensure_installed = ensure_installed,
+    handlers = {
+        default_setup,
+    },
+})
 
 local cmp = require('cmp')
 
 cmp.setup({
-    mapping = {
+    sources = {
+        {name = 'nvim_lsp'},
+    },
+    mapping = cmp.mapping.preset.insert({
+        -- Enter key confirms completion item
         ['<CR>'] = cmp.mapping.confirm({select = true}),
+    }),
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
+})
+
+lspconfig.jedi_language_server.setup{
+    init_options = {
+        workspace = {
+            extraPaths = {'./pyvendor'}
+        }
     }
+}
+
+-- TODO: Find a way to get sources directly from Mason
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    debug = true,
+    sources = {
+        -- Python
+        null_ls.builtins.diagnostics.pylint,
+        null_ls.builtins.formatting.black,
+        -- PHP
+        null_ls.builtins.diagnostics.phpcs,
+    },
 })

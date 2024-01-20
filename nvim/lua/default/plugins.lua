@@ -1,11 +1,12 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
         "clone",
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
+        "--branch=stable",
         lazypath,
     })
 end
@@ -14,7 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.2',
-        -- or                              , branch = '0.1.x',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     {
@@ -44,19 +44,19 @@ require("lazy").setup({
         event = "BufReadPre *.blade.php"
     },
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
+        'neovim/nvim-lspconfig',
         dependencies = {
-            -- LSP Support
-            {'neovim/nvim-lspconfig'},             -- Required
-            {'williamboman/mason.nvim'},           -- Optional
-            {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-            -- Autocompletion
-            {'hrsh7th/nvim-cmp'},     -- Required
-            {'hrsh7th/cmp-nvim-lsp'}, -- Required
-            {'L3MON4D3/LuaSnip'},     -- Required
-        }
+            -- LSP installation
+            {'williamboman/mason.nvim'},
+            {'williamboman/mason-lspconfig.nvim'},
+            -- Completion dialog
+            {'hrsh7th/nvim-cmp'},
+            {'hrsh7th/cmp-nvim-lsp'},
+            -- Integrate linters and formatters
+            {'nvimtools/none-ls.nvim'}, -- Alternative to deprecated null-ls
+            -- Snippet engine (Required by some LSPs)
+            {'L3MON4D3/LuaSnip'},
+        },
     },
     {
         'nvim-lualine/lualine.nvim',
@@ -68,5 +68,11 @@ require("lazy").setup({
     },
     {'APZelos/blamer.nvim'},
     {'dhruvasagar/vim-table-mode'},
-    { "lukas-reineke/indent-blankline.nvim", main="ibl", opts = {} }
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main="ibl",
+        opts = {},
+        lazy = true,
+        event = "BufReadPre *.md"
+    }
 })
