@@ -88,5 +88,6 @@ null_ls.setup({
         null_ls.builtins.formatting.black,
         -- PHP
         null_ls.builtins.diagnostics.phpcs,
+        null_ls.builtins.formatting.phpcsfixer,
     },
 })
