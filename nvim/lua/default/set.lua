@@ -27,3 +27,13 @@ vim.opt.expandtab = true
 --
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+--
+-- Diagnostic Settings
+--
+vim.opt.signcolumn = "yes" -- Always keep space for signs
+vim.fn.sign_define('DiagnosticSignWarn', { text = "", texthl="DiagnosticSignWarn" })
+vim.fn.sign_define('DiagnosticSignError', { text = "", texthl="DiagnosticSignError" })
+vim.fn.sign_define('DiagnosticSignInfo', { text = "", texthl="DiagnosticSignInfo" })
+vim.diagnostic.config({ severity_sort = true })
+
