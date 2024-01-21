@@ -43,9 +43,9 @@ function install_app() {
     echo -e "\nInstalling $1..."
 
     if [ "$os" == "macos" ]; then
-        brew_install $1 $2  >> "$HOME/.ammardev_dotfiles_installation_$(logsDate).log"
+        brew_install $1 $2  >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
     else
-        apt_install $1 $2  >> "$HOME/.ammardev_dotfiles_installation_$(logsDate).log"
+        apt_install $1 $2  >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
     fi
 }
 
@@ -165,7 +165,7 @@ if (($isInteractive)); then
     done
 else
     if [ "$os" == "gh" ] || [ "$os" == "ubuntu" ]; then
-        sudo apt-get update -y >> "$HOME/.ammardev_dotfiles_installation_$(logsDate).log"
+        sudo apt-get update -y >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
     fi
 
     if [ ! -d "$HOME/.config" ]; then
