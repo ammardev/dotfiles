@@ -3,12 +3,17 @@ local lspconfig = require('lspconfig');
 vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
 vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+
+vim.diagnostic.config({
+    severity_sort = true
+})
+
 vim.keymap.set('n', '<leader>v', function ()
-    print(vim.diagnostic.config({virtual_text=false}))
+    vim.diagnostic.config({virtual_text=false})
 end);
 
 vim.keymap.set('n', '<leader>V', function ()
-    print(vim.diagnostic.config({virtual_text=true}))
+    vim.diagnostic.config({virtual_text=true})
 end);
 
 
