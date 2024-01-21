@@ -73,4 +73,5 @@ require("lazy").setup({
         event = "BufReadPre *.md"
     },
     {"lukas-reineke/indent-blankline.nvim", main="ibl"},
+    {"folke/neodev.nvim"},
 })

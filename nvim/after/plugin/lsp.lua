@@ -1,4 +1,6 @@
 local lspconfig = require('lspconfig');
+require("neodev").setup() -- For NeoVim lua autocompletion
+
 
 vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
