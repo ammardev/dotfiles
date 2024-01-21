@@ -3,6 +3,14 @@ local lspconfig = require('lspconfig');
 vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
 vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+vim.keymap.set('n', '<leader>v', function ()
+    print(vim.diagnostic.config({virtual_text=false}))
+end);
+
+vim.keymap.set('n', '<leader>V', function ()
+    print(vim.diagnostic.config({virtual_text=true}))
+end);
+
 
 vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'LSP actions',
@@ -84,7 +92,12 @@ null_ls.setup({
     debug = false,
     sources = {
         -- Python
-        null_ls.builtins.diagnostics.pylint,
+        null_ls.builtins.diagnostics.pylint.with({
+            extra_args = {
+                "--max-line-length=88",
+                "--disable=missing-class-docstring,too-few-public-methods,missing-function-docstring,too-many-ancestors",
+            },
+        }),
         null_ls.builtins.formatting.black,
         -- PHP
         null_ls.builtins.diagnostics.phpcs,
