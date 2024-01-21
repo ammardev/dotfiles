@@ -65,9 +65,9 @@ function apt_install() {
     fi
 
     if [ "$os" == "gh" ]; then
-        sudo apt-get install "$2" -y 
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install "$2" -y 
     else
-        apt-get install "$2" -y
+        DEBIAN_FRONTEND=noninteractive apt-get install "$2" -y
     fi
 }
 
@@ -166,7 +166,7 @@ if (($isInteractive)); then
     done
 else
     if [ "$os" == "gh" ] || [ "$os" == "ubuntu" ]; then
-        sudo apt-get update -y >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
+        sudo DEBIAN_FRONTEND=noninteractive apt-get update -y >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
     fi
 
     if [ ! -d "$HOME/.config" ]; then
