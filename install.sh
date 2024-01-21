@@ -98,11 +98,12 @@ function nvim_install() {
     if [ "$os" == "macos" ]; then
         install_app "NeoVim" "nvim"
     else
-        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-        chmod u+x nvim.appimage
-        ./nvim.appimage --appimage-extract
-        sudo mv squashfs-root /
-        sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
+        echo "Installing NeoVim using an AppImage..."
+        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
+        chmod u+x nvim.appimage >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
+        ./nvim.appimage --appimage-extract >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
+        sudo mv squashfs-root / >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
+        sudo ln -s /squashfs-root/AppRun /usr/bin/nvim >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
     fi
 
     install_app "ripgrep" "ripgrep"
