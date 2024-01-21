@@ -67,12 +67,10 @@ require("lazy").setup({
         config = function() return require("tmux").setup({copy_sync = { enable = false } }) end
     },
     {'APZelos/blamer.nvim'},
-    {'dhruvasagar/vim-table-mode'},
     {
-        "lukas-reineke/indent-blankline.nvim",
-        main="ibl",
-        opts = {},
+        'dhruvasagar/vim-table-mode',
         lazy = true,
         event = "BufReadPre *.md"
-    }
+    },
+    {"lukas-reineke/indent-blankline.nvim", main="ibl"},
 })
