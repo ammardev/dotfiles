@@ -23,3 +23,8 @@ alias :q="exit"
 alias deploy-to-testing="git checkout develop && git fetch && git reset --hard origin/develop && git merge - && git push && git checkout -"
 alias gc='git checkout $(git branch | fzf-tmux -h)'
 
+alias do-list="doctl compute droplet list"
+alias do-create="doctl compute droplet create --wait --ssh-keys $DO_SSH_KEY_ID --region=fra1 --image=ubuntu-23-10-x64 --size s-1vcpu-2gb"
+alias do-ssh="doctl compute ssh"
+alias do-delete="doctl compute droplet delete"
+
