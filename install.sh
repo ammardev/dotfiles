@@ -14,7 +14,7 @@ else
     exit 1;
 fi
 
-logsDate = "$(date +%F_%H-%M-%S)"
+logsDate="$(date +%F_%H-%M-%S)"
 
 # Parse flags
 
