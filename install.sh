@@ -14,6 +14,8 @@ else
     exit 1;
 fi
 
+logsDate = "$(date +%F_%H-%M-%S)"
+
 # Parse flags
 
 dryRun=0;
@@ -38,10 +40,12 @@ done
 
 # Arg 1: Name, Arg 2: Name in package manager
 function install_app() {
+    echo -e "\nInstalling $1..."
+
     if [ "$os" == "macos" ]; then
-        brew_install $1 $2
+        brew_install $1 $2  >> "$HOME/.ammardev_dotfiles_installation_$(logsDate).log"
     else
-        apt_install $1 $2
+        apt_install $1 $2  >> "$HOME/.ammardev_dotfiles_installation_$(logsDate).log"
     fi
 }
 
@@ -50,8 +54,6 @@ function brew_install() {
         echo -e "\nHomebrew is not found please install it and try again (https://brew.sh)"
         exit 1
     fi
-
-    echo -e "\nInstalling $1..."
 
     brew install "$2"
 }
@@ -62,10 +64,8 @@ function apt_install() {
         exit 1
     fi
 
-    echo -e "\nInstalling $1..."
-
     if [ "$os" == "gh" ]; then
-        sudo apt-get install "$2" -y
+        sudo apt-get install "$2" -y 
     else
         apt-get install "$2" -y
     fi
@@ -165,7 +165,7 @@ if (($isInteractive)); then
     done
 else
     if [ "$os" == "gh" ] || [ "$os" == "ubuntu" ]; then
-        sudo apt-get update -y
+        sudo apt-get update -y >> "$HOME/.ammardev_dotfiles_installation_$(logsDate).log"
     fi
 
     if [ ! -d "$HOME/.config" ]; then
