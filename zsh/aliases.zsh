@@ -26,7 +26,9 @@ alias check-port="nc -vz"
 ## DigitalOcean Aliases
 ##
 alias do-list="doctl compute droplet list"
-alias do-create="doctl compute droplet create --wait --ssh-keys $DO_SSH_KEY_ID --region=fra1 --image=ubuntu-23-10-x64 --size s-1vcpu-2gb"
+function do-create() {
+    doctl compute droplet create --wait --ssh-keys="$DO_SSH_KEY_ID" --region=fra1 --image=ubuntu-23-10-x64 --size s-1vcpu-2gb $1 && echo $'\a'
+}
 alias do-ssh="doctl compute ssh"
 alias do-delete="doctl compute droplet delete"
 
