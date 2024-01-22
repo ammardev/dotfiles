@@ -131,6 +131,8 @@ function zsh_install() {
     backup_existed_dotfile "ZSH" ".zsh"
     backup_existed_dotfile "ZSH" ".zshrc"
 
+    git clone https://github.com/romkatv/powerlevel10k.git "$HOME/.powerlevel10k" >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
+
     install_new_dotfiles "zsh directory" "zsh" ".zsh"
     install_new_dotfiles "zshrc file" "zshrc" ".zshrc"
 
