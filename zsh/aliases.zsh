@@ -7,15 +7,6 @@ alias dcu="docker-compose up -d"
 function dce() {
     docker-compose exec "$1" "$2"
 }
-function _dce() {
-    services=$(docker-compose config --services 2>/dev/null)
-    if [ -z $services ]; then
-        echo "This is not a valid Docker Compose folder"
-    else
-        _arguments "1: :($services)"
-    fi
-}
-compdef _dce dce
 
 ##
 ## VIM Aliases
