@@ -18,12 +18,12 @@ require('lualine').setup {
         }
     },
     sections = {
-        lualine_a = {'buffers'},
+        lualine_a = {{'filename', path = 1}},
         lualine_b = {'diff', 'diagnostics'},
         lualine_c = {},
         lualine_x = {'filetype'},
-        lualine_y = {'progress'},
-        lualine_z = {'searchcount', 'location'}
+        lualine_y = {'searchcount'},
+        lualine_z = {'location', 'branch'}
     },
     inactive_sections = {
         lualine_a = {},
