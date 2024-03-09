@@ -26,3 +26,5 @@ vim.keymap.set("n", "<M-|>", ":vsplit<CR>")
 -- Git Gutter Moving
 vim.keymap.set("n", "]g", ":GitGutterNextHunk<CR>")
 vim.keymap.set("n", "[g", ":GitGutterPrevHunk<CR>")
+
+vim.api.nvim_set_keymap("t", "<ESC>", "<C-\\><C-n>", {noremap = true})
