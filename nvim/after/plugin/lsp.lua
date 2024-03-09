@@ -83,7 +83,6 @@ cmp.setup({
 lspconfig.jedi_language_server.setup{
     init_options = {
         workspace = {
-            extraPaths = {'./pyvendor'}
         }
     }
 }
