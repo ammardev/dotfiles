@@ -19,10 +19,6 @@ vim.keymap.set("v", "<leader>P", "\"+P")
 vim.keymap.set("n", "<leader>d", "\"+d")
 vim.keymap.set("v", "<leader>d", "\"+d")
 
--- Buffers
-vim.keymap.set("n", "<Tab>", ":bn<Cr>")
-vim.keymap.set("n", "<S-Tab>", ":bp<Cr>")
-
 -- Splitting windows
 vim.keymap.set("n", "<M-->", ":split<CR>")
 vim.keymap.set("n", "<M-|>", ":vsplit<CR>")
