@@ -49,7 +49,7 @@ local ensure_installed = {
     "bashls",
     "docker_compose_language_service",
     "gopls",
-    "intelephense",
+    "phpactor",
     "lua_ls",
     "tsserver",
     "yamlls",
