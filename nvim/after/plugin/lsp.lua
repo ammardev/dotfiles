@@ -83,6 +83,7 @@ cmp.setup({
 lspconfig.jedi_language_server.setup{
     init_options = {
         workspace = {
+            environmentPath = './.venv',
         }
     }
 }
@@ -95,12 +96,15 @@ null_ls.setup({
     sources = {
         -- Python
         null_ls.builtins.diagnostics.pylint.with({
+            prefer_local = "./.venv/bin/",
             extra_args = {
                 "--max-line-length=88",
                 "--disable=missing-class-docstring,too-few-public-methods,missing-function-docstring,too-many-ancestors",
             },
         }),
-        null_ls.builtins.formatting.black,
+        null_ls.builtins.formatting.black.with({
+            prefer_local = "./.venv/bin/",
+        }),
         -- PHP
         null_ls.builtins.diagnostics.phpcs,
         null_ls.builtins.formatting.phpcsfixer,
