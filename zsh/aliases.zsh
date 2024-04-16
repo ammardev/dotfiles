@@ -38,3 +38,5 @@ alias do-delete="doctl compute droplet delete"
 alias deploy-to-testing="git checkout develop && git fetch && git reset --hard origin/develop && git merge - && git push && git checkout -"
 alias gc='git checkout $(git branch | fzf-tmux -h)'
 
+eval "$(gh copilot alias -- zsh)"
+alias "?"="ghcs"
