@@ -19,7 +19,7 @@ require('lualine').setup {
     },
     sections = {
         lualine_a = {{'filename', path = 1}},
-        lualine_b = {'diff', 'diagnostics'},
+        lualine_b = {'nvim_treesitter#statusline', 'diff', 'diagnostics'},
         lualine_c = {},
         lualine_x = {'filetype'},
         lualine_y = {'searchcount'},
