@@ -1,11 +1,11 @@
 ##
 ## Docker Aliases
 ##
-alias dc="docker-compose"
+alias dc="docker compose"
 alias ds="docker stop \$(docker ps -q)"
-alias dcu="docker-compose up -d"
+alias dcu="docker compose up -d"
 function dce() {
-    docker-compose exec "$1" "$2"
+    docker compose exec "$1" "$2"
 }
 
 ##
