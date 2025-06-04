@@ -53,7 +53,12 @@ require("lazy").setup({
             {'hrsh7th/nvim-cmp'},
             {'hrsh7th/cmp-nvim-lsp'},
             -- Integrate linters and formatters
-            {'nvimtools/none-ls.nvim'}, -- Alternative to deprecated null-ls
+            {
+                'nvimtools/none-ls.nvim',
+                dependencies = {
+                  "nvimtools/none-ls-extras.nvim",
+                },
+            }, -- Alternative to deprecated null-ls
             -- Snippet engine (Required by some LSPs)
             {'L3MON4D3/LuaSnip'},
         },
