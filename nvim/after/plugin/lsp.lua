@@ -51,9 +51,9 @@ local ensure_installed = {
     "gopls",
     "phpactor",
     "lua_ls",
-    "tsserver",
     "yamlls",
-    "jedi_language_server",
+    "ruff",
+    "pyright",
 }
 
 require('mason-lspconfig').setup({
@@ -80,12 +80,15 @@ cmp.setup({
     },
 })
 
-lspconfig.jedi_language_server.setup{
-    init_options = {
-        workspace = {
-            environmentPath = './.venv',
-        }
-    }
+lspconfig.pyright.setup{
+    handlers = {
+        ['textDocument/publishDiagnostics'] = function() end
+    },
+    settings = {
+        python = {
+            pythonPath = ".venv/bin/python"
+        },
+    },
 }
 
 -- TODO: Find a way to get sources directly from Mason
@@ -95,14 +98,7 @@ null_ls.setup({
     debug = false,
     sources = {
         -- Python
-        null_ls.builtins.diagnostics.pylint.with({
-            prefer_local = "./.venv/bin/",
-            extra_args = {
-                "--max-line-length=88",
-                "--disable=missing-class-docstring,too-few-public-methods,missing-function-docstring,too-many-ancestors",
-            },
-        }),
-        null_ls.builtins.formatting.black.with({
+        require("none-ls.formatting.ruff").with({
             prefer_local = "./.venv/bin/",
         }),
         -- PHP
