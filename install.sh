@@ -99,7 +99,9 @@ function nvim_install() {
         install_app "NeoVim" "nvim"
     else
         echo "Installing NeoVim using an AppImage..."
-        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage 2>> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
+        # get cpu architecture
+        cpuArch=$(uname -m)
+        curl -L -o "nvim.appimage" "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-${cpuArch}.appimage" 2>> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
         chmod u+x nvim.appimage 2>> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
         ./nvim.appimage --appimage-extract >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
         sudo mv squashfs-root /opt/nvim >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
