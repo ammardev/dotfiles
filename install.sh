@@ -21,7 +21,7 @@ logsDate="$(date +%F_%H-%M-%S)"
 dryRun=0;
 isInteractive=0;
 
-flags=$(getopt -l "dry" -- "$@")
+flags=$(getopt -l "dry-run,interactive" -- "$@")
 set -- $flags
 
 while [ $# -gt 0 ]
@@ -99,11 +99,11 @@ function nvim_install() {
         install_app "NeoVim" "nvim"
     else
         echo "Installing NeoVim using an AppImage..."
-        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
-        chmod u+x nvim.appimage >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
-        ./nvim.appimage --appimage-extract >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
-        sudo mv squashfs-root / >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
-        sudo ln -s /squashfs-root/AppRun /usr/bin/nvim >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
+        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage 2>> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
+        chmod u+x nvim.appimage 2>> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
+        ./nvim.appimage --appimage-extract >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
+        sudo mv squashfs-root /opt/nvim >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
+        sudo ln -sf /opt/nvim/AppRun /usr/bin/nvim >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
     fi
 
     install_app "ripgrep" "ripgrep"
