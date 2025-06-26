@@ -139,18 +139,28 @@ function zsh_install() {
     sudo chsh -s "$(which zsh)"
 }
 
+function fish_install() {
+    install_app "Fish" "fish"
+
+    backup_existed_dotfile "Fish config" ".config/fish"
+
+    install_new_dotfiles "fish config directory" "fish" ".config/fish"
+
+    sudo chsh -s "$(which fish)"
+}
+
 function install_all() {
     echo -e "\nInstalling all dotfiles";
 
     nvim_install;
     tmux_install;
-    zsh_install;
+    fish_install;
 }
 
 PS3="Select dotfiles to install: "
 
 if (($isInteractive)); then
-    select selected in "All dotfiles" "NeoVim" "Tmux" "ZSH"; do
+    select selected in "All dotfiles" "NeoVim" "Tmux" "Fish" "ZSH"; do
         case $selected in
             "All dotfiles")
                 install_all;;
@@ -158,6 +168,8 @@ if (($isInteractive)); then
                 nvim_install;;
             "Tmux")
                 tmux_install;;
+            "Fish")
+                fish_install;;
             "ZSH")
                 zsh_install;;
             *)
