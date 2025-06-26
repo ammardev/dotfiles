@@ -2,6 +2,4 @@
 
 git clone https://github.com/ammardev/dotfiles "$HOME/.dotfiles";
 
-cd "$HOME/.dotfiles"
-
-source "install.sh"
+source "$HOME/.dotfiles/install.sh"

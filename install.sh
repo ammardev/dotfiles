@@ -101,13 +101,11 @@ function nvim_install() {
         echo "Installing NeoVim using an AppImage..."
         # get cpu architecture
         cpuArch=$(uname -m)
-        cd ~
         curl -L -o "nvim.appimage" "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-${cpuArch}.appimage" 2>> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
         chmod u+x nvim.appimage 2>> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
         ./nvim.appimage --appimage-extract >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
         sudo mv squashfs-root /opt/nvim >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
         sudo ln -sf /opt/nvim/AppRun /usr/bin/nvim >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
-        cd -
     fi
 
     install_app "ripgrep" "ripgrep"
