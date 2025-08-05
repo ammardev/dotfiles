@@ -1,28 +1,53 @@
-local lspconfig = require('lspconfig');
-require("neodev").setup() -- For NeoVim lua autocompletion
-
-
 vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
-vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-
-vim.keymap.set('n', '<leader>v', function ()
-    vim.diagnostic.config({virtual_text=false})
+vim.keymap.set('n', '<leader>v', function()
+    vim.diagnostic.config({ virtual_text = false })
+end);
+vim.keymap.set('n', '<leader>V', function()
+    vim.diagnostic.config({ virtual_text = true })
 end);
 
-vim.keymap.set('n', '<leader>V', function ()
-    vim.diagnostic.config({virtual_text=true})
-end);
 
+local function prefers_local(local_relative_path, global_cmd, args)
+    local cwd = vim.fn.getcwd()
+    local local_bin = cwd .. "/" .. local_relative_path
+
+    if vim.fn.executable(local_bin) == 1 then
+        return vim.list_extend({ local_bin }, args or {})
+    end
+
+    local global_bin = vim.fn.exepath(global_cmd)
+    if vim.fn.executable(global_bin) == 1 then
+        return vim.list_extend({ global_bin }, args or {})
+    end
+
+    return vim.list_extend({ global_cmd }, args or {})
+end
+
+require('blink.cmp').setup({
+    keymap = { preset = 'super-tab' }, -- TODO: Add enter in addition to super-tab
+    completion = {
+        menu = { border = 'single' },
+        keyword = { range = 'full' },
+        documentation = { auto_show = true }
+    },
+    accept = { auto_brackets = { enabled = true }, }, -- Disable if it caused issues
+    sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+    },
+    documentation = { auto_show = true, auto_show_delay_ms = 500 },
+    fuzzy = { implementation = "prefer_rust_with_warning" },
+    signature = { enabled = true }, -- Experimental feature
+    cmdline = {
+        keymap = { preset = 'inherit' },
+        completion = { menu = { auto_show = true } },
+    },
+})
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    desc = 'LSP actions',
     callback = function(event)
-        local opts = {buffer = event.buf}
-
+        local opts = { buffer = event.buf }
         -- these will be buffer-local keybindings
         -- because they only work if you have an active language server
-        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
         vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
         vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
         vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
@@ -30,79 +55,73 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
         vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
         vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-        vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+        vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
         vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
     end
 })
 
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-local default_setup = function(server)
-    lspconfig[server].setup({
-        capabilities = lsp_capabilities,
-    })
-end
-
-require('mason').setup({})
-
-local ensure_installed = {
-    "bashls",
-    "docker_compose_language_service",
-    "gopls",
-    "phpactor",
-    "lua_ls",
-    "yamlls",
-    "ruff",
-    "pyright",
-}
-
-require('mason-lspconfig').setup({
-    ensure_installed = ensure_installed,
-    handlers = {
-        default_setup,
-    },
+vim.lsp.enable('pyright')
+vim.lsp.config('pyright', {
+    cmd = prefers_local(
+        '.venv/bin/pyright-langserver',
+        'pyright-langserver',
+        { '--stdio' }
+    ),
 })
-
-local cmp = require('cmp')
-
-cmp.setup({
-    sources = {
-        {name = 'nvim_lsp'},
-    },
-    mapping = cmp.mapping.preset.insert({
-        -- Enter key confirms completion item
-        ['<CR>'] = cmp.mapping.confirm({select = true}),
-    }),
-    snippet = {
-        expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-        end,
-    },
+vim.lsp.enable('ruff')
+vim.lsp.config('ruff', {
+    cmd = prefers_local(
+        '.venv/bin/ruff',
+        'ruff',
+        { 'server' }
+    ),
 })
+vim.lsp.enable('lua_ls')
+vim.lsp.config('lua_ls', {
+    on_init = function(client)
+        if client.workspace_folders then
+            local path = client.workspace_folders[1].name
+            if
+                path ~= vim.fn.stdpath('config')
+                and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+            then
+                return
+            end
+        end
 
-lspconfig.pyright.setup{
-    handlers = {
-        ['textDocument/publishDiagnostics'] = function() end
-    },
+        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most
+                -- likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+                -- Tell the language server how to find Lua modules same way as Neovim
+                -- (see `:h lua-module-load`)
+                path = {
+                    'lua/?.lua',
+                    'lua/?/init.lua',
+                },
+            },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME
+                    -- Depending on the usage, you might want to add additional paths
+                    -- here.
+                    -- '${3rd}/luv/library'
+                    -- '${3rd}/busted/library'
+                }
+                -- Or pull in all of 'runtimepath'.
+                -- NOTE: this is a lot slower and will cause issues when working on
+                -- your own configuration.
+                -- See https://github.com/neovim/nvim-lspconfig/issues/3189
+                -- library = {
+                --   vim.api.nvim_get_runtime_file('', true),
+                -- }
+            }
+        })
+    end,
     settings = {
-        python = {
-            pythonPath = ".venv/bin/python"
-        },
-    },
-}
-
--- TODO: Find a way to get sources directly from Mason
-local null_ls = require("null-ls")
-
-null_ls.setup({
-    debug = false,
-    sources = {
-        -- Python
-        require("none-ls.formatting.ruff").with({
-            prefer_local = "./.venv/bin/",
-        }),
-        -- PHP
-        null_ls.builtins.diagnostics.phpcs,
-        null_ls.builtins.formatting.phpcsfixer,
-    },
+        Lua = {}
+    }
 })

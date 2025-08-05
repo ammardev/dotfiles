@@ -44,25 +44,13 @@ require("lazy").setup({
         event = "BufReadPre *.blade.php"
     },
     {
-        'neovim/nvim-lspconfig',
-        dependencies = {
-            -- LSP installation
-            {'williamboman/mason.nvim'},
-            {'williamboman/mason-lspconfig.nvim'},
-            -- Completion dialog
-            {'hrsh7th/nvim-cmp'},
-            {'hrsh7th/cmp-nvim-lsp'},
-            -- Integrate linters and formatters
-            {
-                'nvimtools/none-ls.nvim',
-                dependencies = {
-                  "nvimtools/none-ls-extras.nvim",
-                },
-            }, -- Alternative to deprecated null-ls
-            -- Snippet engine (Required by some LSPs)
-            {'L3MON4D3/LuaSnip'},
-        },
+        'saghen/blink.cmp',
+        dependencies = { 'rafamadriz/friendly-snippets' }, -- Optional remove if not needed
+        -- use a release tag to download pre-built binaries
+        version = '1.*',
+        opts_extend = { "sources.default" }
     },
+    { 'neovim/nvim-lspconfig', },
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }
@@ -78,6 +66,5 @@ require("lazy").setup({
         event = "BufReadPre *.md"
     },
     {"lukas-reineke/indent-blankline.nvim", main="ibl"},
-    {"folke/neodev.nvim"},
     {"github/copilot.vim"},
 })
