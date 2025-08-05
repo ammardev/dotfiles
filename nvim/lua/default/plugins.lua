@@ -14,7 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.8',
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     {
@@ -26,10 +27,10 @@ require("lazy").setup({
             vim.cmd("colorscheme tokyonight-night")
         end
     },
-    { "nvim-treesitter/nvim-treesitter", build = "TSUpdate"},
+    { "nvim-treesitter/nvim-treesitter", build = "TSUpdate" },
     {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      dependencies = "nvim-treesitter/nvim-treesitter",
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        dependencies = "nvim-treesitter/nvim-treesitter",
     },
     { "tpope/vim-fugitive" },
     {
@@ -57,14 +58,14 @@ require("lazy").setup({
     },
     {
         "aserowy/tmux.nvim",
-        config = function() return require("tmux").setup({copy_sync = { enable = false } }) end
+        config = function() return require("tmux").setup({ copy_sync = { enable = false } }) end
     },
-    {'APZelos/blamer.nvim'},
+    { 'APZelos/blamer.nvim' },
     {
         'dhruvasagar/vim-table-mode',
         lazy = true,
         event = "BufReadPre *.md"
     },
-    {"lukas-reineke/indent-blankline.nvim", main="ibl"},
-    {"github/copilot.vim"},
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
+    { "github/copilot.vim" },
 })
