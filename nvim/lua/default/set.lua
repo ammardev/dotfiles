@@ -3,7 +3,7 @@
 --
 vim.g.mapleader = " "
 vim.opt.wrap = false
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = "120" -- TODO: Change depending on the file type
 vim.opt.list = true
 vim.opt.hidden = true -- Allow change the buffer without saving
 
