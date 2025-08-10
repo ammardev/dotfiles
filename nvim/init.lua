@@ -1,1 +1,3 @@
-require("default")
+require("opts")
+require("remaps")
+require("plugins")
