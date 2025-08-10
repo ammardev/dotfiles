@@ -33,13 +33,8 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter-textobjects",
         dependencies = "nvim-treesitter/nvim-treesitter",
     },
-    { "tpope/vim-fugitive" },
-    {
-        "airblade/vim-gitgutter",
-        config = function()
-            vim.cmd("set updatetime=100")
-        end
-    },
+    { "NeogitOrg/neogit" },
+    { "lewis6991/gitsigns.nvim" },
     {
         'saghen/blink.cmp',
         dependencies = { 'rafamadriz/friendly-snippets' }, -- Optional remove if not needed
@@ -53,7 +48,6 @@ require("lazy").setup({
         "aserowy/tmux.nvim",
         config = function() return require("tmux").setup({ copy_sync = { enable = false } }) end
     },
-    { 'APZelos/blamer.nvim' },
     {
         'dhruvasagar/vim-table-mode',
         lazy = true,

@@ -19,9 +19,10 @@ vim.keymap.set("v", "<leader>P", "\"+P")
 vim.keymap.set("n", "<leader>d", "\"+d")
 vim.keymap.set("v", "<leader>d", "\"+d")
 
--- Git Gutter Moving
-vim.keymap.set("n", "]g", ":GitGutterNextHunk<CR>")
-vim.keymap.set("n", "[g", ":GitGutterPrevHunk<CR>")
+-- Git Keymaps
+vim.keymap.set("n", "gG", ":Neogit kind=floating<CR>")
+vim.keymap.set("n", "]g", ":Gitsigns nav_hunk next<CR>")
+vim.keymap.set("n", "[g", ":Gitsigns nav_hunk prev<CR>")
 
 -- Enable <ESC> to exit insert mode in terminal
 vim.api.nvim_set_keymap("t", "<ESC>", "<C-\\><C-n>", {noremap = true})

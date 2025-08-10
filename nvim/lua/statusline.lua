@@ -50,9 +50,9 @@ local statusline = {
     '%m',
     '%=',
     '%3l:%-2c',
-    ' %{FugitiveHead()}',
+    ' %{get(b:, "gitsigns_head", "")}',
+    '%{get(b:, "gitsigns_status", "")}',
     '%{%v:lua.get_diagnostics_count()%}',
-    '%{%v:lua.git_status()%}',
     ' ',
 }
 vim.o.statusline = table.concat(statusline, ' ')
