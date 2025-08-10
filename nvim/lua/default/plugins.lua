@@ -52,10 +52,7 @@ require("lazy").setup({
         opts_extend = { "sources.default" }
     },
     { 'neovim/nvim-lspconfig', },
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }
-    },
+    { 'nvim-tree/nvim-web-devicons', lazy = true },
     {
         "aserowy/tmux.nvim",
         config = function() return require("tmux").setup({ copy_sync = { enable = false } }) end
