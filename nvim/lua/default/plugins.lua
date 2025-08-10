@@ -40,11 +40,6 @@ require("lazy").setup({
         end
     },
     {
-        'jwalton512/vim-blade',
-        lazy = true,
-        event = "BufReadPre *.blade.php"
-    },
-    {
         'saghen/blink.cmp',
         dependencies = { 'rafamadriz/friendly-snippets' }, -- Optional remove if not needed
         -- use a release tag to download pre-built binaries
