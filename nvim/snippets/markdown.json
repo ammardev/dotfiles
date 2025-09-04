@@ -1,0 +1,13 @@
+{
+  "incident_log_temp": {
+    "prefix": "incident",
+    "body": [
+      "## ${1:incident_title}",
+      "**Time Spent**: ${2:time_spent}",
+      "**Ticket**: ${3:ticket}",
+      "**System**: ${4:system}",
+      "**Feature**: ${5:feature}"
+    ],
+    "description": "Insert incident log template"
+  }
+}
