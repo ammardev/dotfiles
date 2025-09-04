@@ -21,7 +21,7 @@ logsDate="$(date +%F_%H-%M-%S)"
 dryRun=0;
 isInteractive=0;
 
-flags=$(getopt -l "dry-run,interactive" -- "$@")
+flags=$(getopt -o "" -l "dry-run,interactive" -- "$@")
 set -- $flags
 
 while [ $# -gt 0 ]
