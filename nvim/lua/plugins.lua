@@ -27,7 +27,7 @@ require("lazy").setup({
             vim.cmd("colorscheme tokyonight-night")
         end
     },
-    { "nvim-treesitter/nvim-treesitter", build = "TSUpdate" },
+    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
     { "numToStr/Comment.nvim" },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
