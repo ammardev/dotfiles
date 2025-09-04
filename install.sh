@@ -125,6 +125,11 @@ function tmux_install() {
     backup_existed_dotfile "Tmux" ".tmux.conf"
 
     install_new_dotfiles "Tmux" "tmux/tmux.conf" ".tmux.conf"
+
+    if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+        echo "Installing tmux plugin manager..."
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
+    fi
 }
 
 function zsh_install() {
