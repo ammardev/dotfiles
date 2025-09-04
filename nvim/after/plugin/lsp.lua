@@ -125,3 +125,5 @@ vim.lsp.config('lua_ls', {
         Lua = {}
     }
 })
+
+vim.lsp.enable('ts_ls')
