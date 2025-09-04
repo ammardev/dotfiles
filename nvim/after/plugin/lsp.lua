@@ -24,7 +24,7 @@ local function prefers_local(local_relative_path, global_cmd, args)
 end
 
 require('blink.cmp').setup({
-    keymap = { preset = 'super-tab' }, -- TODO: Add enter in addition to super-tab
+    keymap = { preset = 'super-tab' },
     completion = {
         menu = { border = 'single' },
         keyword = { range = 'full' },
