@@ -1,5 +1,4 @@
 # Fish shell plugins and generated files
-fish/fish_plugins
 fish/completions/
 fish/fish_variables
 fish/conf.d/hydro.fish
