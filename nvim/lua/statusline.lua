@@ -1,17 +1,3 @@
-_G.git_status = function()
-    local ok, summary = pcall(vim.fn.GitGutterGetHunkSummary)
-    if not ok or not summary then
-        return { '', '', '' }
-    end
-    local added, modified, removed = summary[1], summary[2], summary[3]
-    return table.concat({
-        added > 0 and '%#GitGutterAdd#' .. '+' .. added or '',
-        modified > 0 and '%#GitGutterChange#' .. '~' .. modified or '',
-        removed > 0 and '%#GitGutterDelete#' .. '-' .. removed or '',
-        '%#StatusLine#',
-    }, ' ')
-end
-
 _G.buffer_file_icon = function()
     local icon, hl_group = require("nvim-web-devicons").get_icon_by_filetype(vim.bo.filetype, { default = true })
     return ('%%#%s#%s'):format(hl_group or 'StatusLine', icon or '')
