@@ -1,6 +1,7 @@
 set -gx EDITOR nvim
 
 # Path configuration
+fish_add_path ~/.local/bin
 fish_add_path /opt/homebrew/bin
 fish_add_path (go env GOPATH)/bin 2>/dev/null
 fish_add_path ~/.cargo/bin
