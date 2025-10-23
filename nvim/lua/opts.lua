@@ -37,3 +37,4 @@ vim.fn.sign_define('DiagnosticSignError', { text = "", texthl="DiagnosticSign
 vim.fn.sign_define('DiagnosticSignInfo', { text = "", texthl="DiagnosticSignInfo" })
 vim.diagnostic.config({ severity_sort = true })
 
+vim.opt.spell = true

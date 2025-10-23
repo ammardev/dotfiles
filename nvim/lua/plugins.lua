@@ -33,7 +33,7 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter-textobjects",
         dependencies = "nvim-treesitter/nvim-treesitter",
     },
-    { "NeogitOrg/neogit" },
+    { "NeogitOrg/neogit" , dependencies = {"sindrets/diffview.nvim"} },
     { "lewis6991/gitsigns.nvim" },
     {
         'saghen/blink.cmp',
@@ -54,6 +54,16 @@ require("lazy").setup({
         event = "BufReadPre *.md"
     },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
-    { "github/copilot.vim" },
+    -- { "github/copilot.vim" },
+    {
+        "kylechui/nvim-surround",
+        version = "^3.0.0",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
+    },
 })
 

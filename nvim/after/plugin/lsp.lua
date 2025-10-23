@@ -127,3 +127,5 @@ vim.lsp.config('lua_ls', {
 })
 
 vim.lsp.enable('ts_ls')
+vim.lsp.enable('gopls')
+vim.lsp.enable('protols')
