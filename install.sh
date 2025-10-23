@@ -149,6 +149,14 @@ function zsh_install() {
 function fish_install() {
     install_app "Fish" "fish"
 
+    # Install zoxide
+    echo "Installing zoxide..."
+    if [ "$os" == "macos" ]; then
+        brew install zoxide >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
+    else
+        curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
+    fi
+
     backup_existed_dotfile "Fish config" ".config/fish"
 
     install_new_dotfiles "fish config directory" "fish" ".config/fish"
