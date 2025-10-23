@@ -153,13 +153,9 @@ function fish_install() {
 
     install_new_dotfiles "fish config directory" "fish" ".config/fish"
 
-    # Install fisher plugin manager
-    echo "Installing fisher plugin manager..."
-    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | fish -c "source && fisher install jorgebucaran/fisher" >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
-
     # Install fisher plugins from fish_plugins file
     echo "Installing fisher plugins..."
-    fish -c "fisher update" >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
+    fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher update" >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log" 2>&1
 
     sudo chsh -s "$(which fish)"
 }
