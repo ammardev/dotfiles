@@ -132,20 +132,6 @@ function tmux_install() {
     fi
 }
 
-function zsh_install() {
-    install_app "Zsh" "zsh"
-
-    backup_existed_dotfile "ZSH" ".zsh"
-    backup_existed_dotfile "ZSH" ".zshrc"
-
-    git clone https://github.com/romkatv/powerlevel10k.git "$HOME/.powerlevel10k" >> "$HOME/.ammardev_dotfiles_installation_$logsDate.log"
-
-    install_new_dotfiles "zsh directory" "zsh" ".zsh"
-    install_new_dotfiles "zshrc file" "zshrc" ".zshrc"
-
-    sudo chsh -s "$(which zsh)"
-}
-
 function fish_install() {
     install_app "Fish" "fish"
 
@@ -189,8 +175,6 @@ if (($isInteractive)); then
                 tmux_install;;
             "Fish")
                 fish_install;;
-            "ZSH")
-                zsh_install;;
             *)
                 echo "Invalid Command";
                 exit 1;;
