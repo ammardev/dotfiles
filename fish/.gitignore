@@ -1,1 +1,4 @@
 conf.d/private.fish
+functions/fisher.fish
+functions/fish_mode_prompt.fish
+functions/fish_prompt.fish
