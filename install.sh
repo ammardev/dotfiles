@@ -160,6 +160,8 @@ function install_all() {
     nvim_install;
     tmux_install;
     fish_install;
+
+    install_new_dotfiles "Tmux" "wezterm.lua" ".wezterm.lua"
 }
 
 PS3="Select dotfiles to install: "
