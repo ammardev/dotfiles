@@ -35,10 +35,3 @@ vim.keymap.set("n", "gB", ":Gitsigns blame<CR>")
 
 -- Enable <ESC> to exit insert mode in terminal
 vim.api.nvim_set_keymap("t", "<ESC>", "<C-\\><C-n>", { noremap = true })
-
--- Copilot accept
-vim.keymap.set('i', '<C-a>', 'copilot#Accept("\\<CR>")', {
-    expr = true,
-    replace_keycodes = false
-})
-vim.g.copilot_no_tab_map = true

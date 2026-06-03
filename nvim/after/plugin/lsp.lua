@@ -30,11 +30,9 @@ require('blink.cmp').setup({
         keyword = { range = 'full' },
         documentation = { auto_show = true }
     },
-    accept = { auto_brackets = { enabled = true }, }, -- Disable if it caused issues
     sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
-    documentation = { auto_show = true, auto_show_delay_ms = 500 },
     fuzzy = { implementation = "prefer_rust_with_warning" },
     signature = { enabled = true }, -- Experimental feature
     cmdline = {

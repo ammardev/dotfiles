@@ -15,7 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     {
@@ -27,12 +26,8 @@ require("lazy").setup({
             vim.cmd("colorscheme tokyonight-night")
         end
     },
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", branch = "main", },
     { "numToStr/Comment.nvim" },
-    {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        dependencies = "nvim-treesitter/nvim-treesitter",
-    },
     { "NeogitOrg/neogit" , dependencies = {"sindrets/diffview.nvim"} },
     { "lewis6991/gitsigns.nvim" },
     {
@@ -54,7 +49,6 @@ require("lazy").setup({
         event = "BufReadPre *.md"
     },
     { "lukas-reineke/indent-blankline.nvim", main = "ibl" },
-    -- { "github/copilot.vim" },
     {
         "kylechui/nvim-surround",
         version = "^3.0.0",
