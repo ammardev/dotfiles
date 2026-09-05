@@ -154,12 +154,19 @@ function fish_install() {
     sudo chsh -s "$(which fish)"
 }
 
+function ghostty_install() {
+    backup_existed_dotfile "Ghostty config" ".config/ghostty"
+
+    install_new_dotfiles "Ghostty" "ghostty" ".config/ghostty"
+}
+
 function install_all() {
     echo -e "\nInstalling all dotfiles";
 
     nvim_install;
     tmux_install;
     fish_install;
+    ghostty_install;
 
     install_new_dotfiles "Tmux" "wezterm.lua" ".wezterm.lua"
 }
@@ -167,7 +174,7 @@ function install_all() {
 PS3="Select dotfiles to install: "
 
 if (($isInteractive)); then
-    select selected in "All dotfiles" "NeoVim" "Tmux" "Fish" "ZSH"; do
+    select selected in "All dotfiles" "NeoVim" "Tmux" "Fish" "Ghostty" "ZSH"; do
         case $selected in
             "All dotfiles")
                 install_all;;
@@ -177,6 +184,8 @@ if (($isInteractive)); then
                 tmux_install;;
             "Fish")
                 fish_install;;
+            "Ghostty")
+                ghostty_install;;
             *)
                 echo "Invalid Command";
                 exit 1;;
