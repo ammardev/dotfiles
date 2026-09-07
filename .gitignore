@@ -2,3 +2,6 @@
 fish/completions/
 fish/fish_variables
 fish/conf.d/hydro.fish
+
+# vim.pack's generated lockfile (machine-specific resolved revisions)
+nvim/nvim-pack-lock.json
