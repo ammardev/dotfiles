@@ -167,8 +167,6 @@ function install_all() {
     tmux_install;
     fish_install;
     ghostty_install;
-
-    install_new_dotfiles "Tmux" "wezterm.lua" ".wezterm.lua"
 }
 
 PS3="Select dotfiles to install: "
